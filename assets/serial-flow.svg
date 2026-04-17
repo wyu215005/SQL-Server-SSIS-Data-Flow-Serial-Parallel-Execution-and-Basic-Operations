@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="140" viewBox="0 0 840 140" role="img" aria-label="SSIS 串联执行示意图">
+  <rect width="840" height="140" fill="#ffffff"/>
+  <defs>
+    <style>
+      .box{fill:#f3f8ff;stroke:#2f6feb;stroke-width:2;rx:8;ry:8}
+      .txt{font:14px 'Microsoft YaHei',Arial,sans-serif;fill:#0b1f44}
+      .arrow{stroke:#6e7781;stroke-width:2;marker-end:url(#m)}
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#6e7781"/>
+    </marker>
+  </defs>
+  <rect class="box" x="20" y="40" width="180" height="60"/>
+  <text class="txt" x="110" y="75" text-anchor="middle">提取客户数据</text>
+
+  <rect class="box" x="230" y="40" width="180" height="60"/>
+  <text class="txt" x="320" y="75" text-anchor="middle">清洗与标准化</text>
+
+  <rect class="box" x="440" y="40" width="180" height="60"/>
+  <text class="txt" x="530" y="75" text-anchor="middle">计算派生字段</text>
+
+  <rect class="box" x="650" y="40" width="170" height="60"/>
+  <text class="txt" x="735" y="75" text-anchor="middle">加载到数据仓库</text>
+
+  <line class="arrow" x1="200" y1="70" x2="225" y2="70"/>
+  <line class="arrow" x1="410" y1="70" x2="435" y2="70"/>
+  <line class="arrow" x1="620" y1="70" x2="645" y2="70"/>
+</svg>
