@@ -480,7 +480,8 @@ T0 预检查(连接/锁/参数)
 
 - 并发参数：先低并发，再逐步上调 `MaxConcurrentExecutables`；
 - 批次参数：全链路统一 `batch_id` / `data_date` / `watermark`；
-- 写入参数：大表按分区写入，目标端优先使用 SSIS OLE DB Destination 的 Data Access Mode=`Table or view - fast load`（Fast Load 配置；如需逐行触发器/严格逐条约束校验时不建议使用）；
+- 写入参数（性能）：大表按分区写入，目标端优先使用 SSIS OLE DB Destination 的 Data Access Mode=`Table or view - fast load`（Fast Load 配置）；
+- 写入参数（约束）：如需逐行触发器或严格逐条约束校验，不建议使用 Fast Load；
 - 发布策略：ADS 使用“影子表 + 原子切换”，避免直接覆盖；
 - 重试策略：任务级短重试 + 批次级重跑分离，防止重复入库。
 
@@ -516,7 +517,7 @@ READY -> RUNNING -> SUCCESS
 
 - 分流（允许）：一个上游产出多个下游（例如 DWD -> 多个 ADS 应用表）；
 - 回流（默认禁止）：ADS 结果直接回写 DWD/ODS；
-- 例外：必须反馈业务事实时，走独立反馈层（可命名为 FBWD，Feedback Warehouse Data，仅为示例命名），禁止污染原子明细层。
+- 例外：必须反馈业务事实时，走独立反馈层（可命名为 FBWD，Feedback Warehouse Data，仅为示例命名），该层仅用于承接下游反馈事件并经校验后再向上游受控回补，禁止污染原子明细层。
 
 ### 12.6 “数据库如何判断”的本质答案
 
